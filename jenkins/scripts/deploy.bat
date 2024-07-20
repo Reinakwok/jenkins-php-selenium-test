@@ -1,10 +1,17 @@
-#!/usr/bin/env sh
+@echo off
+setlocal
 
-set -x
-docker run -d -p 80:80 --name my-apache-php-app -v c:\\Users\\reina\\Documents\\SIT\\Year2\\Tri3\\ICT2216 Secure Software Development\\Labs\\jenkins-php-selenium-test\\src:/var/www/html php:7.2-apache
-sleep 1
-set +x
+echo Deploying PHP application...
 
-echo 'Now...'
-echo 'Visit http://localhost to see your PHP application in action.'
+REM Ensure the destination directory exists
+if not exist "C:\inetpub\wwwroot\my-php-app" mkdir "C:\inetpub\wwwroot\my-php-app"
+
+REM Copy the PHP application to the web server directory
+xcopy /s /e /y "C:\Users\reina\Documents\SIT\Year2\Tri3\ICT2216 Secure Software Development\Labs\jenkins-php-selenium-test\src" "C:\inetpub\wwwroot\my-php-app"
+
+echo Deployment complete.
+echo 'Visit http://localhost/my-php-app to see your PHP application in action.'
+
+endlocal
+
 

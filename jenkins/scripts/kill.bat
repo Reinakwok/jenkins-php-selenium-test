@@ -1,5 +1,12 @@
-#!/usr/bin/env sh
+@echo off
+setlocal
 
-set -x
-docker kill my-apache-php-app
-docker rm my-apache-php-app
+echo Stopping PHP application...
+
+REM Remove the PHP application directory
+rmdir /s /q "C:\inetpub\wwwroot\my-php-app"
+
+echo PHP application stopped and cleaned up.
+
+endlocal
+

@@ -6,9 +6,9 @@ pipeline {
 				stage('Deploy') {
 					agent any
 					steps {
-                        bat 'jenkins\\scripts\\deploy.bat'
-                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                        bat 'jenkins\\scripts\\kill.bat'
+						sh './jenkins/scripts/deploy.sh'
+						input message: 'Finished using the web site? (Click "Proceed" to continue)'
+						sh './jenkins/scripts/kill.sh'
 					}
 				}
 				stage('Headless Browser Test') {
@@ -19,8 +19,8 @@ pipeline {
 					// 	}
 					// }
 					steps {
-						bat 'mvn -B -DskipTests clean package'
-						bat 'mvn test'
+						sh 'mvn -B -DskipTests clean package'
+						sh 'mvn test'
 					}
 					post {
 						always {
